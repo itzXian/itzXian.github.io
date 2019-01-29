@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk-container"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '<%= get_config('comment.clientID') %>',
+        clientSecret: '<%= get_config('comment.clientSecret') %>',
+        id: window.location.pathname,
+        repo: '<%= get_config('comment.repo') %>',
+        owner: '<%= get_config('comment.owner') %>',
+        admin: '<%= get_config('comment.admin') %>'
+    })
+    gitalk.render('gitalk-container')
+</script>
