@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <link rel="manifest" href="site/manifest.json">
     <meta charset="utf-8">
-<title>关于我 - Xian Blog</title>
+<title>标签: android termux samba smb - Xian Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -62,30 +62,46 @@
     </div>
 </nav>
 
-    <section class="section">
+    <section class="section section-heading">
     <div class="container">
-    <article class="article content gallery" itemscope itemprop="blogPost">
+        <div class="content">
+            <h5>#android termux samba smb</h5>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            关于我
+            <a href="/zh-cn/Install-Samba-on-Termux/" itemprop="url">Termux部署Samba服务</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2025-11-05T22:00:00.475Z" itemprop="datePublished">11月 6 2025</time>
+            <time datetime="2025-11-05T22:14:10.000Z" itemprop="datePublished">11月 6 2025</time>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            几秒 读完 (约 1 字)
+            2 分钟 读完 (约 294 字)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <center>XiXian</center>
+        <p>1, 安装Samba<br><code>$ pkg i samba</code></p>
+<p>2, 创建用户<br>需要用到<code>root</code>权限，可以装个PRoot来模拟<code>root</code>环境<br>安装PRoot<br><code>$ pkg i proot</code><br>运行PRoot<br><code>$ proot -0</code><br>创建用户（自行修改用户名）<br><code># smbpasswd -a 用户名</code><br>推出PRoot<br><code># exit</code></p>
+<p>3, 复制预设的配置文件模板到对应路径<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir <span class="hljs-variable">$PREFIX</span>/etc/samba</span><br><span class="line">$ cp \</span><br><span class="line">  <span class="hljs-variable">$PREFIX</span>/share/doc/samba/smb.conf.example \</span><br><span class="line">  <span class="hljs-variable">$PREFIX</span>/etc/smb.conf</span><br></pre></td></tr></table></figure></p>
+<p>4, 修改配置文件<br>Termux带的这个配置文件模板就挺完善的了，按需稍作修改就行<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Internal storage]</span><br><span class="line">   comment = Internal storage</span><br><span class="line">   path = /sdcard/</span><br><span class="line">   vfs objects = aio_pthread</span><br><span class="line">   aio_pthread:aio open = yes</span><br><span class="line">   read only = no</span><br><span class="line">   browseable = yes</span><br><span class="line">   writable = yes</span><br><span class="line">   guest ok = no</span><br></pre></td></tr></table></figure></p>
+<p>可以按需另加，例<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Pic]</span><br><span class="line">   comment = Pictures</span><br><span class="line">   path = /sdcard/Pictures/</span><br><span class="line">   vfs objects = aio_pthread</span><br><span class="line">   aio_pthread:aio open = yes</span><br><span class="line">   read only = no</span><br><span class="line">   browseable = yes</span><br><span class="line">   writable = yes</span><br><span class="line">   guest ok = no</span><br></pre></td></tr></table></figure></p>
+<p>5, 尝试启动Samba服务<br><code>$ smbd -i -d3</code></p>
+<p>6, 尝试连接</p>
+<p>7, 创建Termux Service<br>每次都手动运行命令太麻烦，这里直接创建服务，参考<a href="https://wiki.termux.com/wiki/Termux-services" target="_blank" rel="noopener">Termux-services - Termux Wiki</a><br><code>`</code><br>$ pkg i termux-services<br>$ mkdir -p $PREFIX/var/service/smbd/log<br>$ ln -sf \<br>  $PREFIX/share/termux-services/svlogger \<br>  $PREFIX/var/service/smbd/log/run<br>$ cat &gt; $PREFIX/var/service/smbd/run &lt;&lt; EOF</p>
+<p>#!/data/data/com.termux/files/usr/bin/sh<br>smbd -F -d3<br>EOF<br>$ chmod +x $PREFIX/var/service/smbd/run<br>$ sv enable smbd<br>$ sv up smbd</p>
 
     
     </div>
@@ -96,6 +112,8 @@
 
 
 
+    
+    
     </div>
 </section>
     <footer class="footer">
@@ -125,11 +143,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/about/index.html" class="dropdown-item">
+                <a href="/tags/android-termux-samba-smb/index.html" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh-cn/about/index.html" class="dropdown-item">
+                <a href="/zh-cn/tags/android-termux-samba-smb/index.html" class="dropdown-item">
                     简体中文
                 </a>
             
