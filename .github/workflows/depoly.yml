@@ -11,28 +11,24 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  deploy:
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: hexo generate
-  deploy:
+        node-version: [12.22.9]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: hexo generate
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
