@@ -3,19 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Xian's Blog
+title: Xian
 subtitle:
-description: This is my blog.
+description: A simple static blog.
 keywords:
 author: Xian
 language:
 - zh-cn
-- en
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://xixian2106.github.io
+url: https://itzxian.github.io
 root: /
 permalink: :title/
 permalink_defaults:
@@ -25,7 +24,7 @@ pretty_urls:
 # Directory
 source_dir: source
 public_dir: public
-#tag_dir: tags
+tag_dir: tags
 archive_dir: archives
 #category_dir: categories
 code_dir: downloads/code
@@ -42,17 +41,19 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+syntax_highlighter: prismjs
 highlight:
   enable: false
   line_number: true
   auto_detect: false
-  tab_replace:
+  tab_replace: ''
+  wrap: true
+  hljs: false
 prismjs:
   enable: true
   preprocess: true
   line_number: true
-  line_threshold: 0
-  tab_replace: ""
+  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -83,7 +84,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: minos
+theme: minimalism
+## hexo-generator-json-content
 jsonContent:
   meta: true
   pages: false
@@ -102,6 +104,29 @@ jsonContent:
     excerpt: false
     categories: false
     tags: true
-about:
-  enable: true
-  image: '/intro/about-page.jpg'
+## hexo-generator-search
+search:
+  path: search.json  # 输出的搜索数据路径
+  field: post        # 搜索范围，可选值：post、page、all
+  content: true      # 是否包含正文内容
+  template: ./search.xml
+## hexo-generator-feed
+feed:
+  type: # Feed 类型，可选值：atom、rss2、rdf
+    - atom
+    - rss2
+  path: # 可选多个
+    - atom.xml
+    - rss2.xml
+  limit: 30
+  hub:
+  content:
+  content_limit: 160
+  content_limit_delim: ' '
+  order_by: -date
+## hexo-generator-sitemap
+sitemap:
+  path: # 可选只要一个
+    - sitemap.xml
+    - sitemap.txt
+  rel: true # 是否在页面头部添加 rel="sitemap" 链接
