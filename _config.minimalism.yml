@@ -36,10 +36,10 @@ contact:
   bluesky:
 
 # 首页头像图片
-avatar: /images/avatar.png
+avatar: /images/favicon.png
 
 # 站点图标
-favicon: /favicon.ico
+favicon: /images/favicon.ico
 
 # 谷歌统计 跟踪 ID
 ga:
