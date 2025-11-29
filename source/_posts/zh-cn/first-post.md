@@ -47,7 +47,7 @@ Welcome to the Markdown Test Page! This document showcases common Markdown synta
 
 ## Images
 
-![Avatar](https://avatars.githubusercontent.com/u/34748039)
+![Avatar](https://itzxian.github.io/images/favicon.png)
 
 ## Code
 
