@@ -28,7 +28,7 @@ pacmd set-default-sink Snapcast
 ```shell
 $ curl -o snapweb.zip https://github.com/snapcast/snapweb/releases/latest/download/snapweb.zip
 $ unzip snapweb.zip $PREFIX/usr/share/snapweb/
-sed i s/snapserver\/snapweb/snapweb/ $PREFIX/etc/snapserver.conf
+sed i 's/snapserver\/snapweb/snapweb/' $PREFIX/etc/snapserver.conf
 ```
 
 4, 运行`snapserver`
