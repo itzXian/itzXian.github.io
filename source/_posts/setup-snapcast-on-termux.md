@@ -14,7 +14,7 @@ $ pkg i snapserver pulseaudio
 
 2, 按照[Snapcast官方文档](https://github.com/snapcast/snapcast/blob/develop/doc/player_setup.md#pulseaudio)配置PulseAudio
 ```shell
-pacmd load-module module-pipe-sink file=/tmp/snapfifo sink_name=Snapcast format=s16le rate=48000
+pacmd load-module module-pipe-sink file=$PREFIX/tmp/snapfifo sink_name=Snapcast format=s16le rate=48000
 pacmd update-sink-proplist Snapcast device.description=Snapcast
 pacmd set-default-sink Snapcast
 ```
