@@ -56,7 +56,7 @@ if [[ $BASH = *termux* ]]; then #检查当前是否处于TERMUX环境
     pacmd load-module module-pipe-sink file=$PREFIX/tmp/snapfifo sink_name=Snapcast format=s16le rate=48000
     pacmd update-sink-proplist Snapcast device.description=Snapcast
     pacmd set-default-sink Snapcast
-    snapserver & &>/dev/null #运行snapserver且不打印日志
+    snapserver &>/dev/null & #运行snapserver且不打印日志
     cmus
     pkill snapserver #退出cmus后顺便停止snapserver
   }
